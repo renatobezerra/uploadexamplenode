@@ -5,6 +5,7 @@ const app = express();
 const port = process.env.port || 3000;
 
 // Enable node receive json data.
+app.disable('x-powered-by');
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(morgan('dev'));

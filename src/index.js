@@ -4,10 +4,11 @@ require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
+const path = require('path');
 const app = express();
-const port = process.env.port || 3000;
+const port = process.env.PORT || 3000;
 
-mongoose.connect('mongodb://appuser:appuser01@ds259207.mlab.com:59207/uploadmanager', {
+mongoose.connect(process.env.MONGO_URL, {
   useNewUrlParser: true
 });
 
@@ -16,6 +17,9 @@ app.disable('x-powered-by');
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(morgan('dev'));
+app.use(
+  '/files', express.static(path.resolve(__dirname, '..', 'tmp', 'uploads'))
+);
 
 app.use(require('./routes'));
 

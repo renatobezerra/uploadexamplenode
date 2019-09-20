@@ -2,3 +2,4 @@ node_modules/
 img/
 tmp/
 yarn.lock
+.env
